@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>param: {{keyword}}</h1>
-    <h1>query: {{k}}</h1>
+    <TypeNav/>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'Search',
   data() {

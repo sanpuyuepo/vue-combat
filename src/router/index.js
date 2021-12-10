@@ -54,7 +54,7 @@ export default new VueRouter({
       // }
 
       // * 函数写法：可以将 params / query 参数通过 props 传递给路由组件
-      props: route => ({ keyword: route.params.keyword, k: route.query.k })
+      props: route => ({ keyword: route.params.keyword})
     },
     {
       path: '/login',

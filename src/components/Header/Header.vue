@@ -62,18 +62,17 @@ export default {
       // 字符串形式：
       // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
       // 对象：
-      const res = this.$router.push({
+      let location = {
         // * 指定路由 path / name
         name: 'search',
         // ! params 只能和命名路由 name 一起使用，不能搭配 path 使用
         params: {
           keyword: this.keyword || undefined // * 传递的是空字符串，undefined 解决
         },
-        query: {
-          k: this.keyword.toUpperCase()
-        }
-      })
-      console.log(res); // * 返回一个 promise
+      }
+      // 参数合并：类型导航 组件中也需要进行参数合并
+      location.query = this.$route.query
+      this.$router.push(location)
     }
   }
 };
@@ -87,7 +86,7 @@ export default {
   -- 
 
 2.路由传参：
-  1）params: 属于路径当中的一部分，配置路由的时候需要站位
+  1）params: 属于路径当中的一部分，配置路由的时候需要占位
   2）query：不属于路径当中的一部分，类似于ajax中的queryString /home?k=v&kv=, 不-- 需要占位
 
 3.面试题：
