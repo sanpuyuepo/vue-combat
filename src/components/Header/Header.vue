@@ -56,6 +56,11 @@ export default {
       keyword: ''
     };
   },
+  mounted() {
+    this.$bus.$on('clearKeyword', () => {
+      this.keyword = '';
+    })
+  },
   methods: {
     goSearch() {
       // 路由传参

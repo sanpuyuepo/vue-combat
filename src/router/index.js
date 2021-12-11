@@ -3,10 +3,10 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-import Home from '@/pages/Home/Index.vue'
-import Search from '@/pages/Search/Index.vue'
-import Login from '@/pages/Login/Index.vue'
-import Register from '@/pages/Register/Index.vue'
+import Home from '@/pages/Home/'
+import Search from '@/pages/search/'
+import Login from '@/pages/Login/'
+import Register from '@/pages/Register/'
 
 
 
