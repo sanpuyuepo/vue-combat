@@ -51,10 +51,10 @@
             <div class="navbar-inner filter">
               <ul class="sui-nav">
                 <!-- 样式绑定计算属性 -->
-                <li :class="{active: isAsc}" @click="changeOrder()">
+                <li :class="{ active: isAsc }" @click="changeOrder()">
                   <a href="javascript:;">价格⬆</a>
                 </li>
-                <li :class="{active: isDesc}" @click="changeOrder()">
+                <li :class="{ active: isDesc }" @click="changeOrder()">
                   <a href="javascript:;">价格⬇</a>
                 </li>
               </ul>
@@ -100,8 +100,14 @@
           </div>
 
           <!-- 分页 -->
-          <Pagination/>
-         
+          <Pagination
+            :pageNo="params.pageNo"
+            :pageSize="params.pageSize"
+            :total="total"
+            :totalPages="totalPages"
+            :continuous="5"
+            @getCurPageNoCustom="getCurPageNo"
+          />
         </div>
       </div>
     </div>
@@ -109,7 +115,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import SearchSelector from "./SearchSelector/SearchSelector";
 
 export default {
@@ -124,7 +130,7 @@ export default {
         keyword: "",
         order: "",
         pageNo: 1,
-        pageSize: 10,
+        pageSize: 3,
         props: [],
         trademark: "",
       },
@@ -137,18 +143,22 @@ export default {
     Object.assign(this.params, this.$route.query, this.$route.params);
   },
   mounted() {
-    this.params.order = "2:asc"
+    this.params.order = "2:asc";
     this.getData();
   },
   computed: {
     ...mapGetters(["goodsList", "trademarkList", "attrsList"]),
 
     isAsc() {
-      return this.params.order.includes('asc')
+      return this.params.order.includes("asc");
     },
     isDesc() {
-      return this.params.order.includes('desc')
-    }
+      return this.params.order.includes("desc");
+    },
+    ...mapState({
+      total: (state) => state.search.searchList.total,
+      totalPages: (state) => state.search.searchList.totalPages,
+    }),
   },
   methods: {
     getData() {
@@ -204,14 +214,18 @@ export default {
         this.getData();
       }
     },
-
+    // 获取当前页数据
+    getCurPageNo(pageNo) {
+      this.params.pageNo = pageNo;
+      this.getData();
+    },
     // 升降序查询
-    changeOrder() { 
-      if (this.params.order.includes('asc')) {
-        this.params.order = this.params.order.replace('asc', 'desc')
+    changeOrder() {
+      if (this.params.order.includes("asc")) {
+        this.params.order = this.params.order.replace("asc", "desc");
       } else {
-        this.params.order = this.params.order.replace('desc', 'asc')
-      } 
+        this.params.order = this.params.order.replace("desc", "asc");
+      }
       this.getData();
     },
   },
@@ -470,8 +484,6 @@ export default {
           }
         }
       }
-
-      
     }
   }
 }
