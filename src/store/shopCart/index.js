@@ -26,6 +26,17 @@ const actions = {
       return Promise.reject(new Error('fail'))
     }
   },
+  deleteAllCheckedCart({dispatch, getters}) {
+    let promiseAll = [];
+    getters.cartList.cartInfoList.forEach(item => {
+      if (item.isChecked == 1) {
+        let promise = dispatch('deleteCartListBySkuId', item.skuId)
+        promiseAll.push(promise);
+      }
+    });
+    return Promise.all(promiseAll);
+  },
+
   async updateCheckStatus({commit}, {skuId, isChecked}) {
     let res = await reqUpdateCheckStatus(skuId, isChecked);
     if (res.code === 200) {
@@ -33,6 +44,16 @@ const actions = {
     } else {
       return Promise.reject(new Error('fail'))
     }
+  },
+  // updateAllCheckStatus
+  updateAllCheckStatus({dispatch, state}, checked) {
+    let promiseAll = [];
+    console.log(state.shopCartList[0].cartInfoList);
+    state.shopCartList[0].cartInfoList.forEach(item => {
+      let promise = dispatch('updateCheckStatus', {skuId: item.skuId, isChecked: checked})
+        promiseAll.push(promise);
+    });
+    return Promise.all(promiseAll);
   }
 };
 

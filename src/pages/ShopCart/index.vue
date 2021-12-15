@@ -49,11 +49,11 @@
     </div>
     <div class="cart-tool">
       <div class="select-all">
-        <input class="chooseAll" type="checkbox" :checked="isAllChecked"/>
+        <input class="chooseAll" type="checkbox" :checked="isAllChecked" @change="updateAllCheckStatus($event)" />
         <span>全选</span>
       </div>
       <div class="option">
-        <a href="#none">删除选中的商品</a>
+        <a href="#none" @click="deleteAllCheckedCart">删除选中的商品</a>
         <a href="#none">移到我的关注</a>
         <a href="#none">清除下柜商品</a>
       </div>
@@ -114,11 +114,30 @@ export default {
         alert('error.message')
       }
     },
+    async deleteAllCheckedCart() {
+      try {
+        await this.$store.dispatch('deleteAllCheckedCart')
+        this.getShopCartList();
+      } catch (error) {
+        alert('error.message')
+      }
+    },
     // 修改勾选状态
     async updateCheckStatus(cart, event) {
        try {
         let isChecked = event.target.checked ? '1' : '0';
         await this.$store.dispatch('updateCheckStatus', {skuId: cart.skuId, isChecked});
+        this.getShopCartList();
+      } catch (error) {
+        alert('error.message')
+      }
+    },
+    // 全部修改勾选状态
+    async updateAllCheckStatus(event) {
+      try {
+        let checked = event.target.checked ? '1' : '0';
+        
+        await this.$store.dispatch('updateAllCheckStatus', checked)
         this.getShopCartList();
       } catch (error) {
         alert('error.message')
