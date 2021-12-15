@@ -1,4 +1,5 @@
 // 封装工具函数
+import { v4 as uuidv4 } from 'uuid';
 
 // debounce
 const debounce = function debounce(callback, delay, immediate) {
@@ -68,7 +69,19 @@ const throttle = function throttle(callback, delay) {
   }
 }
 
+// 游客临时身份id
+const getUUID = () => {
+  let uuid_token = localStorage.getItem('uuid_token');
+  if (!uuid_token) {
+    uuid_token = uuidv4();
+    localStorage.setItem('uuid_token', uuid_token);
+  }
+  return uuid_token;
+}
+
+
 export default {
   debounce,
-  throttle
+  throttle,
+  getUUID,
 }

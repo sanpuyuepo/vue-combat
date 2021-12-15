@@ -7,6 +7,8 @@ import axios from 'axios';
 import nProgress from 'nprogress';
 import 'nprogress/nprogress.css'
 
+import store from '@/store';
+
 // 创建 axios 实例
 const req = axios.create({
   baseURL: '/api',
@@ -15,9 +17,12 @@ const req = axios.create({
 
 // ! 请求拦截器
 req.interceptors.request.use(config => {
-  // config 配置对象，其中包含一个很重要的属性： headers 请求头
   // 进度条开始:
   nProgress.start();
+  // config 配置对象，其中包含一个很重要的属性： headers 请求头
+  if (store.state.detail.uuid_token) {
+    config.headers.userTempId = store.state.detail.uuid_token;
+  }
   return config;
 })
 
