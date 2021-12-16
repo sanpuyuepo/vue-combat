@@ -50,8 +50,19 @@ const reqBannerList = () => mockRequests.get('/banner')
 
 // get floor data
 const reqFloorList = () => mockRequests.get('/floor')
+// ========================================================================
 
 const reqUpdateCheckStatus = (skuId, isChecked) => requests({url: `/cart/checkCart/${skuId}/${isChecked}`, method: 'get'})
+
+const reqVerificationCode = phone => requests({url: `/user/passport/sendCode/${phone}`, method: 'get'})
+
+const reqUserRegister = data => requests({url: '/user/passport/register', data, method: 'post'})
+
+const reqUserLogin = data => requests({url: '/user/passport/login', data, method: 'post'})
+
+const reqUserInfo = () => requests({url: '/user/passport/auth/getUserInfo', method: 'get'})
+
+const reqLogout = () => requests({url: '/user/passport/logout', method: 'get'})
 
 export {
   reqCategoryList,
@@ -63,6 +74,11 @@ export {
   reqBannerList,
   reqFloorList,
   reqUpdateCheckStatus,
+  reqVerificationCode,
+  reqUserRegister,
+  reqUserLogin,
+  reqUserInfo,
+  reqLogout
 }
 
 

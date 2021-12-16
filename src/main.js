@@ -21,6 +21,8 @@ Vue.config.productionTip = false
 // Mock
 import './mock/mockServe'
 
+import '@/plugins/validate'
+
 new Vue({
   render: h => h(App),
   // 全局事件总线
