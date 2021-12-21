@@ -1,7 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from '@/router'
+import VueLazyload from 'vue-lazyload'
 
+import loading from '@/assets/loading.gif'
+Vue.use(VueLazyload, {
+  loading: loading,
+})
 
 import store from '@/store'
 import "swiper/css/swiper.css";
