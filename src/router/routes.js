@@ -1,5 +1,4 @@
 import Home from '@/pages/Home/'
-import Search from '@/pages/search/'
 import Login from '@/pages/Login/'
 import Register from '@/pages/Register/'
 import Detail from '@/pages/Detail'
@@ -9,6 +8,7 @@ import Trade from '@/pages/Trade'
 import Pay from '@/pages/Pay'
 import PaySuccess from '@/pages/PaySuccess'
 import Center from '@/pages/Center'
+// 引入子组件
 import MyOrder from '@/pages/Center/myOrder'
 import GroupOrder from '@/pages/Center/groupOrder'
 
@@ -23,7 +23,7 @@ export default [
   {
     name: 'search',
     path: '/search/:keyword?', // * 占位符后添加 问号，指定 params 选择性传递
-    component: Search,
+    component: () => import('@/pages/search/'), // ! 路由懒加载
     meta: {
       showFooter: true
     },
