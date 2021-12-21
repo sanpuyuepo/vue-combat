@@ -81,6 +81,14 @@ export default [
     component: Trade,
     meta: {
       showFooter: true
+    },
+    // 路由独享守卫
+    beforeEnter: (to, from, next) => {
+      if (from.path === '/shopCart') {
+        next()
+      } else {
+        next(false) // 中断当前导航，从哪儿来回哪儿去
+      }
     }
   },
   {
@@ -88,6 +96,14 @@ export default [
     component: Pay,
     meta: {
       showFooter: true
+    },
+    // 路由独享守卫
+    beforeEnter: (to, from, next) => {
+      if (from.path === '/trade') {
+        next()
+      } else {
+        next(false) // 中断当前导航，从哪儿来回哪儿去
+      }
     }
   },
   {

@@ -54,7 +54,14 @@ router.beforeEach(async (to, from, next) => {
       }
     }
   } else {
-    next();
+    // 未登录，不能访问订单，个人中心，支付，交易等页面
+    let toPath = to.path;
+    if (toPath.includes('/trade') || toPath.includes('/pay') || toPath.includes('/center')) {
+      // 把未登录的时候想访问的路由存储到地址栏
+      next('/login?redirect=' + toPath)
+    } else {
+      next();
+    } 
   }
 
 })

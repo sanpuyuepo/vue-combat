@@ -88,8 +88,9 @@ export default {
         phone &&
           password &&
           (await this.$store.dispatch("userLogin", { phone, password }));
-        // 登录成功跳转到home页
-        this.$router.push("/home");
+        // 登录的路由组件：路由中是否含有query参数，有则跳转到指定路由，无则跳转到home
+        let toPath = this.$route.query.redirect || '/home'
+        this.$router.push(toPath);
       } catch (error) {
         alert(error.message);
       }
