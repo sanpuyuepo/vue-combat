@@ -149,6 +149,7 @@ export default {
     height: 445px;
     border: 1px solid rgb(223, 223, 223);
     margin: 0 auto;
+    
 
     h3 {
       background: #ececec;
@@ -177,12 +178,13 @@ export default {
       padding-left: 390px;
       margin-bottom: 18px;
       position: relative;
+      text-align: left;
 
       label {
         font-size: 14px;
         width: 96px;
         text-align: right;
-        display: inline-block;
+        display: inline-block; 
       }
 
       input {
