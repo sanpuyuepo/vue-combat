@@ -64,6 +64,24 @@ const reqUserInfo = () => requests({url: '/user/passport/auth/getUserInfo', meth
 
 const reqLogout = () => requests({url: '/user/passport/logout', method: 'get'})
 
+const reqUserAddressList = () => requests({url: '/user/userAddress/auth/findUserAddressList', method: 'get'})
+
+const reqOrderInfo = () => requests({url: '/order/auth/trade', method: 'get'})
+
+// 提交订单
+const reqSubmitOrder = (tradeNo, data) => requests({url: `/order/auth/submitOrder?tradeNo=${tradeNo}`, data, method: 'post'})
+
+// 支付信息
+const reqPayInfo = orderId => requests({url: `/payment/weixin/createNative/${orderId}`, method: 'get'})
+
+// 支付状态
+const reqPaymentStatus = orderId => requests({url: `/payment/weixin/queryPayStatus/${orderId}`, method: 'get'})
+
+// 获取我的订单 /api/order/auth/{page}/{limit}
+const reqMyOrderList = (page, limit) => requests({url: `order/auth/${page}/${limit}`, method: 'get'})
+
+
+
 export {
   reqCategoryList,
   reqGetSearchInfo,
@@ -78,7 +96,13 @@ export {
   reqUserRegister,
   reqUserLogin,
   reqUserInfo,
-  reqLogout
+  reqLogout,
+  reqUserAddressList,
+  reqOrderInfo,
+  reqSubmitOrder,
+  reqPayInfo,
+  reqPaymentStatus,
+  reqMyOrderList,
 }
 
 

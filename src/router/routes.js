@@ -5,6 +5,12 @@ import Register from '@/pages/Register/'
 import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
+import Trade from '@/pages/Trade'
+import Pay from '@/pages/Pay'
+import PaySuccess from '@/pages/PaySuccess'
+import Center from '@/pages/Center'
+import MyOrder from '@/pages/Center/myOrder'
+import GroupOrder from '@/pages/Center/groupOrder'
 
 export default [
   {
@@ -32,7 +38,7 @@ export default [
     // }
 
     // * 函数写法：可以将 params / query 参数通过 props 传递给路由组件
-    props: route => ({ keyword: route.params.keyword})
+    props: route => ({ keyword: route.params.keyword })
   },
   {
     path: '/login',
@@ -69,7 +75,51 @@ export default [
     meta: {
       showFooter: true
     }
-  },,
+  },
+  {
+    path: '/trade',
+    component: Trade,
+    meta: {
+      showFooter: true
+    }
+  },
+  {
+    path: '/pay',
+    component: Pay,
+    meta: {
+      showFooter: true
+    }
+  },
+  {
+    path: '/paySuccess',
+    component: PaySuccess,
+    meta: {
+      showFooter: true
+    }
+  },
+  {
+    path: '/center',
+    component: Center,
+    meta: {
+      showFooter: true
+    },
+    children: [
+      {
+        // 二级路由不用写 / 
+        path: 'myOrder',
+        component: MyOrder,
+      },
+      {
+        path: 'groupOrder',
+        component: GroupOrder,
+      },
+      {
+        path: '/center',
+        redirect: '/center/myOrder',
+      }
+    ]
+  },
+
   // 重定向
   {
     path: '*',

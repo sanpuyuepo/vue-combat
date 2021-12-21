@@ -3,25 +3,37 @@
     <button :disabled="pageNo === 1" @click="sendCurPageNo(pageNo - 1)">
       上一页
     </button>
-    <button v-if="continuousNum.start > 1" @click="sendCurPageNo(1)" :class=" {active: pageNo === 1} ">1</button>
+    <button
+      v-if="continuousNum.start > 1"
+      @click="sendCurPageNo(1)"
+      :class="{ active: pageNo === 1 }"
+    >
+      1
+    </button>
     <button v-if="continuousNum.start > 2">···</button>
 
+    <!-- continuousPage -->
     <button
-      v-for="(page, index) in continuousNum.end"
+      v-for="(page, index) in continuousPage"
       :key="index"
       @click="sendCurPageNo(page)"
-      :class=" {active: pageNo === page}"
+      :class="{ active: pageNo === page }"
     >
-      <template v-if="page >= continuousNum.start">
-        {{ page }}
-      </template>
+      {{ page }}
     </button>
 
     <button v-if="continuousNum.end < totalPages - 1">···</button>
-    <button v-if="continuousNum.end < totalPages" @click="sendCurPageNo(totalPages)" :class=" {active: pageNo === totalPages}">
+    <button
+      v-if="continuousNum.end < totalPages"
+      @click="sendCurPageNo(totalPages)"
+      :class="{ active: pageNo === totalPages }"
+    >
       {{ totalPages }}
     </button>
-    <button :disabled="pageNo === totalPages" @click="sendCurPageNo(pageNo + 1)">
+    <button
+      :disabled="pageNo === totalPages"
+      @click="sendCurPageNo(pageNo + 1)"
+    >
       下一页
     </button>
 
@@ -51,12 +63,20 @@ export default {
           end = totalPages;
           start = end - continuous + 1;
         }
-        
       } else {
         end = totalPages;
       }
-      console.log({start, end});
+      console.log({ start, end });
       return { start, end };
+    },
+    continuousPage() {
+      let res = [];
+      for (let page = 1; page <= this.continuousNum.end; page++) {
+        if (page >= this.continuousNum.start) {
+          res.push(page);
+        }
+      }
+      return res;
     },
   },
   methods: {

@@ -62,7 +62,7 @@ const actions = {
       commit('GET_USER_INFO', res.data)
       return 'ok';
     } else {
-      return Promise.reject(new Error('fail'))
+      return Promise.reject(new Error('未登录'))
     }
   },
 

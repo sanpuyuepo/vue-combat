@@ -5,6 +5,7 @@ import router from '@/router'
 
 import store from '@/store'
 import "swiper/css/swiper.css";
+import { MessageBox } from 'element-ui'
 
 // 导入全局组件
 import TypeNav from '@/components/TypeNav'
@@ -16,18 +17,24 @@ Vue.component(TypeNav.name, TypeNav)
 Vue.component(Carousel.name, Carousel)
 Vue.component(Pagination.name, Pagination)
 
+Vue.prototype.$msgbox = MessageBox
+Vue.prototype.$alert = MessageBox.alert
+
 Vue.config.productionTip = false
 
 // Mock
 import './mock/mockServe'
 
 import '@/plugins/validate'
+// 统一引入
+import * as API from '@/api'
 
 new Vue({
   render: h => h(App),
   // 全局事件总线
   beforeCreate() {
     Vue.prototype.$bus = this;
+    Vue.prototype.$API = API
   },
   // 注册 router 路由, 组件实例身上都有 $route, $router 属性
   router,
