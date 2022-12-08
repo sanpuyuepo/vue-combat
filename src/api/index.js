@@ -38,7 +38,7 @@ const reqAddCart = (skuId, skuNum) => {
   })
 }
 
-// 删除购物车 byId
+// 删除购物车byId
 const reqDeleteCartBySkuId = (skuId) => requests({url: `/cart/deleteCart/${skuId}`, method: 'delete'})
 
 // 获取购物车列表
